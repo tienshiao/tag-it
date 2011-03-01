@@ -2,6 +2,8 @@ After looking for a jQuery plugin for handling a 'tag suggestion' form field, in
 
 Check the example.html for a demo.
 
+Check the pre-defined.html for a demo of pre-defined tags.
+
 == License
 
 tag-it is released under the MIT license.

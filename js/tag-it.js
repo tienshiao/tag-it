@@ -3,6 +3,7 @@
 	$.fn.tagit = function(options) {
 
 		var el = this;
+		var tags = new Array();
 
 		const BACKSPACE		= 8;
 		const ENTER			= 13;
