@@ -103,11 +103,16 @@
 			return is_new;
 		}
 		function create_choice (value){
+            if(options.hiddenFieldName != null)
+              field_name = options.hiddenFieldName;
+            else
+              field_name = 'item[tags][]';
+
 			var el = "";
 			el  = "<li class=\"tagit-choice\">\n";
 			el += value + "\n";
 			el += "<a class=\"close\">x</a>\n";
-			el += "<input type=\"hidden\" style=\"display:none;\" value=\""+value+"\" name=\"item[tags][]\">\n";
+			el += "<input type=\"hidden\" style=\"display:none;\" value=\""+value+"\" name=\"" + field_name + "\">\n";
 			el += "</li>\n";
 			var li_search_tags = this.tag_input.parent();
 			$(el).insertBefore (li_search_tags);
