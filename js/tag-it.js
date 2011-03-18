@@ -1,6 +1,6 @@
 (function($) {
 
-	$.fn.tagit = function(options) {
+	$.fn.tagit = function (options) {
 
 		var el = this;
 		var tags = new Array();
@@ -19,10 +19,10 @@
 		});
 
 		// create the input field.
-		var html_input_field = "<li class=\"tagit-new\"><input class=\"tagit-input\" type=\"text\" /></li>\n";
-		el.html (html_input_field);
+		var html_input_field = '<li class="tagit-new"><input class="tagit-input" type="text" /></li>';
+		el.html(html_input_field);
 
-		tag_input		= el.children(".tagit-new").children(".tagit-input");
+		tag_input = el.children(".tagit-new").children(".tagit-input");
 
 		// add support for tags already set at page load.
 		var i = 0;
@@ -63,36 +63,43 @@
 			// Comma/Space/Enter are all valid delimiters for new tags.
 			else if (event.which == COMMA || event.which == SPACE || event.which == ENTER) {
 				event.preventDefault();
-
-				var typed = tag_input.val();
-				typed = typed.replace(/,+$/,"");
-				typed = typed.trim();
-
-				if (typed != "") {
-					if (is_new (typed)) {
-						create_choice (typed);
-					}
-					// Cleaning the input.
-					tag_input.val("");
-				}
+				check_for_tag();
 			}
 		});
 
 		tag_input.autocomplete({
 			source: options.availableTags, 
-			select: function(event,ui){
-				if (is_new (ui.item.value)) {
+			select: function (event,ui) {
+				if (is_new(ui.item.value)) {
 					create_choice (ui.item.value);
 				}
 				// Cleaning the input.
 				tag_input.val("");
-
 				// Preventing the tag input to be update with the chosen value.
 				return false;
 			}
 		});
 
-		function is_new (value){
+		// check if there's a tag when the element loses focus
+		tag_input.blur(function(){
+			check_for_tag();
+		});
+		
+		function check_for_tag () {
+			var typed = tag_input.val();
+			typed = typed.replace(/,+$/,"");
+			typed = typed.trim();
+
+			if (typed != "") {
+				if (is_new(typed)) {
+					create_choice(typed);
+				}
+				// Cleaning the input.
+				tag_input.val("");
+			}
+		}
+
+		function is_new (value) {
 			var is_new = true;
 			this.tag_input.parents("ul").children(".tagit-choice").each(function(i){
 				n = $(this).children("input").val();
@@ -102,22 +109,26 @@
 			})
 			return is_new;
 		}
-		function create_choice (value){
+
+
+		function create_choice (value) {
             if(options.hiddenFieldName != null)
               field_name = options.hiddenFieldName;
             else
               field_name = 'item[tags][]';
 
-			var el = "";
-			el  = "<li class=\"tagit-choice\">\n";
-			el += value + "\n";
-			el += "<a class=\"close\">x</a>\n";
-			el += "<input type=\"hidden\" style=\"display:none;\" value=\""+value+"\" name=\"" + field_name + "\">\n";
-			el += "</li>\n";
-			var li_search_tags = this.tag_input.parent();
-			$(el).insertBefore (li_search_tags);
+			var el = '';
+			el  = '<li class="tagit-choice">';
+			el += value;
+			el += '<a class="close">x</a>';
+			el += '<input type="hidden" style="display:none;" value="'+value+'" name="item[tags][]">';
+			el += '</li>';
+
+            var li_search_tags = this.tag_input.parent();
+			$(el).insertBefore(li_search_tags);
 			this.tag_input.val("");
 		}
+
 	};
 
 	String.prototype.trim = function() {
