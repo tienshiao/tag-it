@@ -80,10 +80,11 @@
 			}
 		});
 
-		// check if there's a tag when the element loses focus
-		tag_input.blur(function(){
+		/* On blur functionality does not work with autocomplete...
+        tag_input.blur(function(){
 			check_for_tag();
 		});
+        */
 		
 		function check_for_tag () {
 			var typed = tag_input.val();
