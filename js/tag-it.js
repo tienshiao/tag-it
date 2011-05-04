@@ -65,11 +65,25 @@
 				event.preventDefault();
 				check_for_tag();
 			}
-		});
+		}).blur(function(e){
+                  // Create a tag when the element loses focus (unless it's empty).
+                  if (is_new(tag_input.val())) {
+                    create_choice(tag_input.val());
+                  }
+                });
 
 		tag_input.autocomplete({
 			source: options.availableTags, 
 			select: function (event,ui) {
+				// Delete the last tag if we autocomplete something despite the input being empty
+				// This happens because the input's blur event causes the tag to be created when
+				// the user clicks an autocomplete item.
+				// The only artifact of this is that while the user holds down the mouse button
+				// on the selected autocomplete item, a tag is shown with the pre-autocompleted text,
+				// and is changed to the autocompleted text upon mouseup.
+                                if (tag_input.val() == '') {
+                                  $(el).children(".tagit-choice:last").remove();
+                                }
 				if (is_new(ui.item.value)) {
 					create_choice (ui.item.value);
 				}
