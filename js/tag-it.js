@@ -67,7 +67,7 @@
 			}
 		}).blur(function(e){
                   // Create a tag when the element loses focus (unless it's empty).
-                  if (is_new(tag_input.val())) {
+                  if (is_new(tag_input.val()) && (tag_input.val() != '')) {
                     create_choice(tag_input.val());
                   }
                 });
