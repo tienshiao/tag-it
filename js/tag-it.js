@@ -63,14 +63,11 @@
 			// Comma/Space/Enter are all valid delimiters for new tags.
 			else if (event.which == COMMA || event.which == SPACE || event.which == ENTER) {
 				event.preventDefault();
-				check_for_tag();
+                                // We use the blur method instead of check_for_tag. You'll say that its the same thing but this way the autocomplete select box is removed when we hit the ENTER key.
+				// check_for_tag();
+                                tag_input.blur();
 			}
-		}).blur(function(e){
-                  // Create a tag when the element loses focus (unless it's empty).
-                  if (is_new(tag_input.val()) && (tag_input.val() != '')) {
-                    create_choice(tag_input.val());
-                  }
-                });
+		});
 
 		tag_input.autocomplete({
 			source: options.availableTags, 
@@ -94,11 +91,9 @@
 			}
 		});
 
-		/* On blur functionality does not work with autocomplete...
-        tag_input.blur(function(){
-			check_for_tag();
+                tag_input.blur(function(){
+                      check_for_tag();
 		});
-        */
 		
 		function check_for_tag () {
 			var typed = tag_input.val();
