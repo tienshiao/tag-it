@@ -136,7 +136,7 @@
 			el  = '<li class="tagit-choice">';
 			el += value;
 			el += '<a class="close">x</a>';
-			el += '<input type="hidden" style="display:none;" value="'+value+'" name="item[tags][]">';
+			el += '<input type="hidden" style="display:none;" value="'+value+'" name="' + field_name + '">\n'
 			el += '</li>';
 
             var li_search_tags = this.tag_input.parent();
