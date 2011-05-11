@@ -53,29 +53,29 @@
 			}
 		});
 
-        // fix webkit support for backspace
-        tag_input.keydown(function(event){
+		// fix webkit support for backspace
+		tag_input.keydown(function(event){
 			if (event.which == BACKSPACE) {
 				if (tag_input.val() == "") {
 					// When backspace is pressed, the last tag is deleted.
 					$(el).children(".tagit-choice:last").remove();
 				}
 			}
-        });
+		});
 
-        var savesize = tag_input.attr('size');
-        tag_input.keyup(function(event){
-            tag_input.attr('size', Math.max(savesize, tag_input.val().length));
-        });
+		var savesize = tag_input.attr('size');
+		tag_input.keyup(function(event){
+			tag_input.attr('size', Math.max(savesize, tag_input.val().length));
+		});
 
 		tag_input.keypress(function(event){
 			// Comma/Space/Enter are all valid delimiters for new tags.
 			if (event.which == COMMA || event.which == SPACE || event.which == ENTER) {
 				event.preventDefault();
-                                // We use the blur method instead of check_for_tag. You'll say that its the same thing but this way the autocomplete select box is removed when we hit the ENTER key.
+				// We use the blur method instead of check_for_tag. You'll say that its the same thing but this way the autocomplete select box is removed when we hit the ENTER key.
 				// check_for_tag();
-                                tag_input.blur();
-                tag_input.focus();
+				tag_input.blur();
+				tag_input.focus();
 			}
 		});
 
@@ -88,9 +88,9 @@
 				// The only artifact of this is that while the user holds down the mouse button
 				// on the selected autocomplete item, a tag is shown with the pre-autocompleted text,
 				// and is changed to the autocompleted text upon mouseup.
-                                if (tag_input.val() == '') {
-                                  $(el).children(".tagit-choice:last").remove();
-                                }
+				if (tag_input.val() == '') {
+					$(el).children(".tagit-choice:last").remove();
+				}
 				if (is_new(ui.item.value)) {
 					create_choice (ui.item.value);
 				}
@@ -101,8 +101,8 @@
 			}
 		});
 
-                tag_input.blur(function(){
-                      check_for_tag();
+		tag_input.blur(function(){
+			check_for_tag();
 		});
 		
 		function check_for_tag () {
@@ -132,10 +132,11 @@
 
 
 		function create_choice (value) {
-            if(options.hiddenFieldName != null)
-              field_name = options.hiddenFieldName;
-            else
-              field_name = 'item[tags][]';
+			if (options.hiddenFieldName != null) {
+				field_name = options.hiddenFieldName;
+			} else {
+				field_name = 'item[tags][]';
+			}
 
 			var el = '';
 			el  = '<li class="tagit-choice">';
@@ -144,7 +145,7 @@
 			el += '<input type="hidden" style="display:none;" value="'+value+'" name="' + field_name + '">\n'
 			el += '</li>';
 
-            var li_search_tags = tag_input.parent();
+			var li_search_tags = tag_input.parent();
 			$(el).insertBefore(li_search_tags);
 			tag_input.val("");
 		}
