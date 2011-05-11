@@ -70,6 +70,10 @@
                                 // We use the blur method instead of check_for_tag. You'll say that its the same thing but this way the autocomplete select box is removed when we hit the ENTER key.
 				// check_for_tag();
                                 tag_input.blur();
+                tag_input.focus();
+//                setTimeout(function(){
+//                    tag_input.focus();
+//                }, 100); 
 			}
 		});
 
@@ -110,9 +114,6 @@
 				}
 				// Cleaning the input.
 				tag_input.val("");
-                setTimeout(function(){
-                    tag_input.focus();
-                }, 100); 
 			}
 		}
 
