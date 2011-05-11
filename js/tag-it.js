@@ -63,6 +63,11 @@
 			}
         });
 
+        var savesize = tag_input.attr('size');
+        tag_input.keyup(function(event){
+            tag_input.attr('size', Math.max(savesize, tag_input.val().length));
+        });
+
 		tag_input.keypress(function(event){
 			// Comma/Space/Enter are all valid delimiters for new tags.
 			if (event.which == COMMA || event.which == SPACE || event.which == ENTER) {
