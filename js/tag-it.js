@@ -71,9 +71,6 @@
 				// check_for_tag();
                                 tag_input.blur();
                 tag_input.focus();
-//                setTimeout(function(){
-//                    tag_input.focus();
-//                }, 100); 
 			}
 		});
 
