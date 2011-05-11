@@ -110,6 +110,9 @@
 				}
 				// Cleaning the input.
 				tag_input.val("");
+                setTimeout(function(){
+                    tag_input.focus();
+                }, 100); 
 			}
 		}
 
