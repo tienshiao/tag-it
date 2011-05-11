@@ -53,15 +53,19 @@
 			}
 		});
 
-		tag_input.keypress(function(event){
+        // fix webkit support for backspace
+        tag_input.keydown(function(event){
 			if (event.which == BACKSPACE) {
 				if (tag_input.val() == "") {
 					// When backspace is pressed, the last tag is deleted.
 					$(el).children(".tagit-choice:last").remove();
 				}
 			}
+        });
+
+		tag_input.keypress(function(event){
 			// Comma/Space/Enter are all valid delimiters for new tags.
-			else if (event.which == COMMA || event.which == SPACE || event.which == ENTER) {
+			if (event.which == COMMA || event.which == SPACE || event.which == ENTER) {
 				event.preventDefault();
                                 // We use the blur method instead of check_for_tag. You'll say that its the same thing but this way the autocomplete select box is removed when we hit the ENTER key.
 				// check_for_tag();
