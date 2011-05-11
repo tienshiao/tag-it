@@ -22,7 +22,7 @@
 		var html_input_field = '<li class="tagit-new"><input class="tagit-input" type="text" /></li>';
 		el.html(html_input_field);
 
-		tag_input = el.children(".tagit-new").children(".tagit-input");
+		var tag_input = el.children(".tagit-new").children(".tagit-input");
 
 		// add support for tags already set at page load.
 		var i = 0;
@@ -111,7 +111,7 @@
 
 		function is_new (value) {
 			var is_new = true;
-			this.tag_input.parents("ul").children(".tagit-choice").each(function(i){
+			tag_input.parents("ul").children(".tagit-choice").each(function(i){
 				n = $(this).children("input").val();
 				if (value == n) {
 					is_new = false;
@@ -134,9 +134,9 @@
 			el += '<input type="hidden" style="display:none;" value="'+value+'" name="' + field_name + '">\n'
 			el += '</li>';
 
-            var li_search_tags = this.tag_input.parent();
+            var li_search_tags = tag_input.parent();
 			$(el).insertBefore(li_search_tags);
-			this.tag_input.val("");
+			tag_input.val("");
 		}
 
 	};
